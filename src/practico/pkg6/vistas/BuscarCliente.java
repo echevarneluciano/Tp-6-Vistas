@@ -5,8 +5,8 @@
  */
 package practico.pkg6.vistas;
 
+import javax.swing.JOptionPane;
 import practico.pkg6.clases.Listas;
-import practico.pkg6.clases.Cliente;
 
 /**
  *
@@ -41,6 +41,8 @@ public class BuscarCliente extends javax.swing.JInternalFrame {
         BbusquedaPtelefono = new javax.swing.JButton();
         BbusquedaPciudad = new javax.swing.JButton();
         BbusquedaPapellido = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel3.setText("Apellido:");
 
@@ -141,13 +143,20 @@ public class BuscarCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BbusquedaPtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbusquedaPtelefonoActionPerformed
-    
-        long telefono=Integer.parseInt(Ttelefono.getText());
+        long telefono=0;
+        try{    
+        telefono=Integer.parseInt(Ttelefono.getText());}
+        catch(NumberFormatException ex){
+        JOptionPane.showMessageDialog(this,"Volver a cargar, en campo telefono ingresar solo numeros");
+        }
         Tapellido.setText("");
         Tciudad.setText("");
         Ttelefono.setText("");
         Listas l1=new Listas();
-        l1.buscarCliente(telefono);
+        if(l1.buscarCliente(telefono)==null){JOptionPane.showMessageDialog(this,"No se encontraron datos");}
+        else
+        JOptionPane.showMessageDialog(this,l1.buscarCliente(telefono));
+        //System.out.println(l1.buscarCliente(telefono));
         // TODO add your handling code here:
     }//GEN-LAST:event_BbusquedaPtelefonoActionPerformed
 
@@ -157,8 +166,9 @@ public class BuscarCliente extends javax.swing.JInternalFrame {
         Tciudad.setText("");
         Ttelefono.setText("");
         Listas l1=new Listas();
-        l1.buscarTelefono(apellido);
-
+        if(l1.buscarTelefono(apellido).isEmpty()){JOptionPane.showMessageDialog(this,"El cliente no esta cargado");}
+        else
+        JOptionPane.showMessageDialog(this,"Telefono: "+l1.buscarTelefono(apellido));
     // TODO add your handling code here:
     }//GEN-LAST:event_BbusquedaPapellidoActionPerformed
 
@@ -168,7 +178,9 @@ public class BuscarCliente extends javax.swing.JInternalFrame {
         Tciudad.setText("");
         Ttelefono.setText("");
         Listas l1=new Listas();
-        System.out.println(l1.buscarClientes(ciudad));
+        if(l1.buscarClientes(ciudad).isEmpty()){JOptionPane.showMessageDialog(this,"No se encontraron datos");}
+        else
+        JOptionPane.showMessageDialog(this,l1.buscarClientes(ciudad));
 
 
         // TODO add your handling code here:

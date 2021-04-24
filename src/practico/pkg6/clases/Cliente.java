@@ -65,6 +65,6 @@ public class Cliente {
     }
      @Override
   public String toString() {
-    return "Datos: " + nombre + "|" +apellido+"|" +ciudad+ "|"+dni+"|"+direccion;
+    return "Nombre: " + nombre + ", Apellido: " +apellido+", Ciudad: " +ciudad+ ", DNI: "+dni+", Direccion: "+direccion;
   }
 }

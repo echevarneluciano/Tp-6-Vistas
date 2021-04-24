@@ -5,6 +5,7 @@
  */
 package practico.pkg6.vistas;
 
+import javax.swing.JOptionPane;
 import practico.pkg6.clases.Cliente;
 import practico.pkg6.clases.Listas;
 
@@ -94,6 +95,8 @@ public class AgregarClientes extends javax.swing.JInternalFrame {
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
@@ -227,7 +230,15 @@ String apellido=Tapellido.getText();
 String ciudad=Tciudad.getText();
 String nombre=Tnombre.getText();
 String domicilio=Tdomicilio.getText();
-long telefono=Integer.parseInt(Ttelefono.getText());
+long telefono=0;
+int err=0;
+try{
+telefono=Integer.parseInt(Ttelefono.getText());
+}
+catch(NumberFormatException ex){
+    JOptionPane.showMessageDialog(this,"Volver a cargar, en campo telefono ingresar solo numeros");
+    err=1;
+}
 Tdni.setText("");
 Tapellido.setText("");
 Tnombre.setText("");
@@ -236,7 +247,9 @@ Ttelefono.setText("");
 Tdomicilio.setText("");
 Listas l1=new Listas();
 Cliente c1=new Cliente(nombre,apellido,ciudad,dni,domicilio);
-l1.agregarCliente(telefono, c1);
+if(l1.agregarCliente(telefono, c1)==1&&err==0&&!(dni.isEmpty()&&apellido.isEmpty()&&ciudad.isEmpty()&&nombre.isEmpty()&&domicilio.isEmpty())){
+JOptionPane.showMessageDialog(this,"Cliente agregado");}
+else JOptionPane.showMessageDialog(this,"ERROR datos invalidos, cliente con mismo telefono o faltan datos de cliente");
 // TODO add your handling code here:
     }//GEN-LAST:event_BingresardatosActionPerformed
 

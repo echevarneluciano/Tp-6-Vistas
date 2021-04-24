@@ -5,6 +5,7 @@
  */
 package practico.pkg6.vistas;
 
+import javax.swing.JOptionPane;
 import practico.pkg6.clases.Listas;
 
 /**
@@ -34,6 +35,8 @@ public class BorrarCliente extends javax.swing.JInternalFrame {
         Bingresardatos = new javax.swing.JButton();
         Tdni = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+
+        setClosable(true);
 
         jLabel2.setText("DNI:");
 
@@ -110,7 +113,11 @@ public class BorrarCliente extends javax.swing.JInternalFrame {
     String dni=Tdni.getText();
     Tdni.setText("");    
     Listas l1=new Listas();
+    if(l1.borrarCliente(dni)==0){JOptionPane.showMessageDialog(this,"No se encontro cliente");}
+    else{
     l1.borrarCliente(dni);
+    JOptionPane.showMessageDialog(this,"Cliente: "+dni+" borrado");}
+    
     
         // TODO add your handling code here:
     }//GEN-LAST:event_BingresardatosActionPerformed

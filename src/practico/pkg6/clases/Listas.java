@@ -52,6 +52,7 @@ public class Listas {
          return resultado;
      }
      public int borrarCliente(String dni){
+         int ok=0;
          Set<Long> key=lista.keySet();
          Iterator it=key.iterator();
          while(it.hasNext()){
@@ -59,8 +60,9 @@ public class Listas {
              Cliente c1=lista.get(l1);
              if(c1.getDni().equals(dni)){
                 it.remove();
+                ok=1;
              }
          }
-         return 0;
+         return ok;
      }
 }
